@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'lato', helvetica, arial;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #232e35;
+  font-family: 'EB Garamond', serif;
+}
+
+
+.gridcontainer {
+  display: grid;
+  margin: auto;
+  max-width: 990px;
+  margin: 0 auto;
+  padding-left: 4%;
+  padding-right: 4%;
+  justify-content: center;
+  grid-template-columns: 2fr 8fr 2fr;
+  grid-template-rows:  1fr 6fr 6fr;
+  grid-gap: 5px;
+  position: relative;
+}
+
+.menu {
+  grid-column: 1 / 4;
+  text-align: center;
+  border: 3px double #1C6EA4;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45); 
+  box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45);
+  min-height: min-content;
+}
+.projects {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: center;
+  border: 3px double #1C6EA4;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45); 
+  box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45);
+  grid-row-end: span 1;
+}
+.devices {
+  grid-column: 1;
+  grid-row: 3;
+  text-align: center;
+  border: 3px double #1C6EA4;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45); 
+  box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45);
+  grid-row-end: span 11;
+  display: grid;
+  grid-gap: 1px;
+  grid-template-rows: 20px 4fr;
+}
+
+.deviceList {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: center;
+  grid-column-end: span 4;
+  grid-row-end: span 8;
+}
+
+.main {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+  border: 3px double #1C6EA4;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45); 
+  box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45);
+  //border: 1px dashed #646c71;
+  grid-row-end: span 12;
+}
+.propertys {
+  grid-column: 3;
+  grid-row: 2;
+  text-align: center;
+    border: 3px double #1C6EA4;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45); 
+  box-shadow: 0px 2px 20px -1px rgba(255,255,255,0.45);
+  grid-row-end: span 12;
+}
+
+.settingButton {
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
+	background-color:#63b8ee;
+	border-radius:3px;
+	border:1px solid #3866a3;
+	display:inline-block;
+	cursor:pointer;
+	color:#14396a;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:0px 3px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #7cacde;
+	&:hover {
+	background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
+	background-color:#468ccf;
+}
+ &:active {
+	position:relative;
+	top:1px;
+}
+ }
