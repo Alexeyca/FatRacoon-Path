@@ -25,11 +25,11 @@ function connectMqtt(){
     connectMqtt.onConnectionLost = onConnectionLost;
     connectMqtt.onMessageArrived = onMessageArrived;
 
-    var options = {onSuccess: onConnect,
+    var options = {
+        onSuccess: onConnect,
         onFailure: onFail,
-    debugging
         useSSL:true
     };
     connectMqtt.connect(options);
-    console.info('Connecting...')
+    console.info('Connecting...');
 }
