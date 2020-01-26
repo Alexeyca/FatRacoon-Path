@@ -33,3 +33,26 @@ function connectMqtt(){
     connectMqtt.connect(options);
     console.info('Connecting...');
 }
+
+function onConnect(){
+    console.log("Client connected");
+    options = {qos:0, onSuccess:function(context){console.log("subscribed");}}
+    clientMqtt.subscribe(topics, options);
+}
+
+function onFail(context){
+    console.log("Failed to connect");
+}
+
+function onConnectionLost(responseObject){
+    if (responseObject.errorCode !== 0) {
+        console.log("Connection Lost: " + responseObject.errorMessage);
+        window.alert("Someone else took my websocket!");
+    }
+}
+
+function onMessageArrived(message){
+    console.log("topic: ", message.destinationName, "message: ", message.payloadString);
+
+}
+
