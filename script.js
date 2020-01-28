@@ -136,18 +136,26 @@ var data = [
   CHILD_HEIGHT_BUFFER_FACTOR = 1;
   
   // jqTree root
-  treeContainer = $('#Tree');
+  projectContainer = $('#projectTree');
+  MQTTContainer = $('#MQTTTree');
   
   //
   // -> Load tree data & options, & bind tree
   //
-  treeContainer.tree({
+  projectContainer.tree({
     data: data,
-    autoOpen: true,
+    autoOpen: false,
+    dragAndDrop: true
+  });
+
+  MQTTContainer.tree({
+    data: data,
+    autoOpen: false,
     dragAndDrop: true
   });
   
-  JQTREE_ROOT = $("#Tree ." + JQTREE_TREE );
+  projectTREE_ROOT = $("#projectTree ." + JQTREE_TREE );
+  MQTTTREE_ROOT = $("#MQTTTree ." + JQTREE_TREE );
   
   // Get padding-top value for group nodes from CSS.  
   // *Must be done before first call to heightenDescendants 
@@ -158,7 +166,8 @@ var data = [
   // custom event handling
   //
   // Shorten closed descendants
-  treeContainer.on( "tree.close", function( closeEvent ){ changeAncestorHeightRecursively( closeEvent.node, false ); } );
+  projectContainer.on( "tree.close", function( closeEvent ){ changeAncestorHeightRecursively( closeEvent.node, false ); } );
+  MQTTContainer.on( "tree.close", function( closeEvent ){ changeAncestorHeightRecursively( closeEvent.node, false ); } );
   // Heighten opened descendants
   // Override JqTreeWidget.prototype.openNode from tree.jquery.js
   // (see http://stackoverflow.com/questions/35513988/access-variable-from-1-js-source-file-jqtree-from-within-different-js-file)
@@ -173,7 +182,8 @@ var data = [
     JQTREEWIDGET_OPENNNODE_METHOD.call( this, node, slide );
   }
   // Heighten descendants on refresh, so they are correct after drag and drop's default height adjustment is then fixed
-  treeContainer.on( "tree.refresh", function( refreshEvent ){ heightenDescendants( JQTREE_ROOT ); } );
+  projectContainer.on( "tree.refresh", function( refreshEvent ){ heightenDescendants( JQTREE_ROOT ); } );
+  MQTTContainer.on( "tree.refresh", function( refreshEvent ){ heightenDescendants( JQTREE_ROOT ); } );
   
   //
   //@param {jQuery} jQuery - jQueryObject
