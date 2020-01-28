@@ -136,7 +136,7 @@ var data = [
   CHILD_HEIGHT_BUFFER_FACTOR = 1;
   
   // jqTree root
-  treeContainer = $('#gramTree');
+  treeContainer = $('#Tree');
   
   //
   // -> Load tree data & options, & bind tree
@@ -147,7 +147,7 @@ var data = [
     dragAndDrop: true
   });
   
-  JQTREE_ROOT = $("#gramTree ." + JQTREE_TREE );
+  JQTREE_ROOT = $("#Tree ." + JQTREE_TREE );
   
   // Get padding-top value for group nodes from CSS.  
   // *Must be done before first call to heightenDescendants 
