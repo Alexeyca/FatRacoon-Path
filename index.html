@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>CodePen - main</title>
   <link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'><link rel="stylesheet" href="./style.css">
-  
+  <link rel='stylesheet' href='https://mbraak.github.io/jqTree/jqtree.css'><link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
@@ -13,11 +13,13 @@
   <div class="menu">Menu</div>
   <div class="projects">Projects</div>
   <div class="devices">
+    <div class="menu">
     <a href="#" class="settingButton">d</a>
     <a href="#" class="settingButton">Refresh</a>
     <a href="#" class="settingButton">add</a>
     <a href="#" class="settingButton">settings</a>
-    <div class="deviceList">Mqtt</div> 
+    </div>
+    <div id="Tree"></div> 
   </div>
   <div class="main">Main</div>  
   <div class="propertys">Propertys</div>
@@ -27,6 +29,7 @@
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js'></script><script  src="./script.js"></script>
 <script src='https://rawgit.com/RickStrahl/jquery-resizable/master/src/jquery-resizable.js'></script><script  src="./script.js"></script>
+<script src='https://rawgit.com/mbraak/jqTree/master/tree.jquery.js'></script><script  src="./script.js"></script>
 
 </body>
 </html>
