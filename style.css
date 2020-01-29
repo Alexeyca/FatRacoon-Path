@@ -54,6 +54,7 @@ body {
   display: grid;
   grid-gap: 1px;
   grid-template-rows: 20px 4fr;
+  overflow-y: auto;
 }
 
 .deviceList {
