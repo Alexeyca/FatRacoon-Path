@@ -12,16 +12,19 @@ $('.devices').resizable();
 $('.main').resizable();
 $('.propertys').resizable();
 
-if (window.sessionStorage.clientName) {
-  clientName = window.sessionStorage.clientName;
-} else {
-  clientName = "mqtt_js_" + parseInt(Math.random() * 100000, 10);
-  window.sessionStorage.clientName = clientName;
-}
+
 
 function connectMqtt() {
-  console.info("ClinetName is " + clientName)
-  clientMqtt = new Paho.MQTT.Client(hostname, Number(port), "mqtt_js_" + parseInt(Math.random() * 100000, 10));
+  if (window.sessionStorage.clientId) {
+    clientName = window.sessionStorage.clientId;
+    console.info("seesionName " + window.sessionStorage.clientId)
+  } else {
+    clientName = "mqtt_js_" + parseInt(Math.random() * 100000, 10);
+    window.sessionStorage.clientId = clientName;
+    console.info("session now " + window.sessionStorage.clientId)
+  }
+  console.info("ClientName is " + clientName)
+  clientMqtt = new Paho.MQTT.Client(hostname, Number(port), clientName);
   console.info('Connecting to Mqtt, host : ', hostname, '. port: ', port, 'Client Name: ', clientName);
   clientMqtt.onConnectionLost = onConnectionLost;
   clientMqtt.onMessageArrived = onMessageArrived;
