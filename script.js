@@ -140,6 +140,12 @@ var data = [
   }
 ];
 
+var MqttTopics = [
+  {
+    label: 'Mqtt'}
+];
+
+
 //
 // jqtree HTML constants
 //
@@ -158,13 +164,13 @@ MQTTContainer = $('#MQTTTree');
 projectContainer.tree({
   data: data,
   autoOpen: false,
-  dragAndDrop: true
+  //dragAndDrop: true
 });
 
 MQTTContainer.tree({
-  data: data,
+  data: MqttTopics,
   autoOpen: false,
-  dragAndDrop: true
+  //dragAndDrop: true
 });
 
 projectTREE_ROOT = $("#projectTree ." + JQTREE_TREE);
@@ -173,7 +179,8 @@ MQTTTREE_ROOT = $("#MQTTTree ." + JQTREE_TREE);
 // Get padding-top value for group nodes from CSS.  
 // *Must be done before first call to heightenDescendants 
 ATTRROLE_VALGROUP_PADDINGTOP = parseInt($("[role='" + ROLE_GROUP + "']").css("padding-top").replace("px", ""));
-heightenDescendants(JQTREE_ROOT);
+heightenDescendants(TREE_ROOT);
+
 
 //
 // custom event handling
