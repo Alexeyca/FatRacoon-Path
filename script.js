@@ -7,11 +7,11 @@ var topics = "#";
 var clientName;
 
 var mqttTopics = [
-  { "id" : "mqtt", "parent" : "#", "text" : "mqtt" },
+  { "id": "mqtt", "parent": "#", "text": "mqtt" },
 ];
 
 var projectsTree = [
-  { "id" : "projects", "parent" : "#", "text" : "projects" },
+  { "id": "projects", "parent": "#", "text": "projects" },
 ];
 
 $('.menu').resizable();
@@ -71,30 +71,62 @@ function onMessageArrived(message) {
 
 function updateMqttTree(topic, message) {
   var chain = topic.split("/");
+  var change=0;
   console.log(chain);
-  var count=0;
-  for (var segment of chain){
-    var check=1;
-    if (!mqttTopics.some(x=>x.id==segment)){
-      if (count>0){
-        console.log(chain[count-1]);
-        $('#mqttTree').jstree().create_node(chain[count-1],{"id":segment,"text":segment});
-      }else{
-        $('#mqttTree').jstree().create_node("#",{"id":segment,"text":segment});
+  var count = 0;
+  for (var segment of chain) {
+    if (!mqttTopics.some(x => x.id == segment)) {
+      if (count > 0) {
+        console.log(chain[count - 1]);
+        if (chain.length == count+1) {
+          console.log("data");
+          $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "data": { "value": message, "type": "string" }, "text": segment });
+        } else {
+          $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "text": segment });
+        }
+      } else {
+        if (chain.length == count) {
+          $('#mqttTree').jstree().create_node("#", { "id": segment, "data": { "value": message, "type": "string" }, "text": segment });
+        } else {
+          $('#mqttTree').jstree().create_node("#", { "id": segment, "text": segment });
+        }
       }
-      mqttTopics=$('#mqttTree').jstree(true).get_json(null,{"flat":true});
+      mqttTopics = $('#mqttTree').jstree(true).get_json(null, { "flat": true });
+      change=1;
     }
-    count=count+1
+    count = count + 1
+  }
+  if (change==0){
+    console.log("value update");
+    var node=$('#mqttTree').jstree(true).get_node(chain[chain.length-1]);
+    console.log(node);
+    node.data.value= message;
+    console.log(node);
+    $('#mqttTree').jstree(true).refresh_node(node);
   }
 
 }
 
-$('#mqttTree').jstree({ 'core' : {
-  'data' : mqttTopics,
-  'check_callback': true
-} });
+$('#mqttTree').jstree({
+  plugins: ["grid", "dnd", "contextmenu", "sort"],
+  core: {
+    data: mqttTopics,
+    check_callback: true
+  },
+  grid: {
+    columns: [
+      { width: 'auto', header: "Topic" },
+      { width: 'auto', value: "value", header: "value", cellClass: "aright" },
+      { width: 'auto', value: "type", header: "type", cellClass: "aright" }
+    ],
+    resizable: true,
 
-$('#projectTree').jstree({ 'core' : {
-  'data' : projectsTree,
-  'check_callback': true
-} });
+  }
+});
+
+$('#projectTree').jstree({
+  'core': {
+    'data': projectsTree,
+    'check_callback': true
+  }
+});
