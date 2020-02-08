@@ -71,36 +71,40 @@ function onMessageArrived(message) {
 
 function updateMqttTree(topic, message) {
   var chain = topic.split("/");
-  var change=0;
+  var topicup=topic.replace("/","-")
+  var node;
+  var path="";
   //console.log(chain);
   var count = 0;
-  for (var segment of chain) {
-    if (!mqttTopics.some(x => x.id == segment)) {
-      if (count > 0) {
-        //console.log(chain[count - 1]);
-        if (chain.length == count+1) {
-          //console.log("data");
-          $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "data": { "value": message, "type": "string" }, "text": segment });
+  if (!(node = $('#mqttTree').jstree(true).get_node(topicup))) {
+    for (var segment of chain) {
+      path=path+segment;
+      if (!$('#mqttTree').jstree(true).get_node(path)) {
+        if (count > 0) {
+          //console.log(chain[count - 1]);
+          if (chain.length == count + 1) {
+            //console.log("data");
+            $('#mqttTree').jstree().create_node(chain[count - 1], { "id": path, "data": { "value": message, "type": "string" }, "text": segment });
+          } else {
+            $('#mqttTree').jstree().create_node(chain[count - 1], { "id": path, "text": segment });
+          }
         } else {
-          $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "text": segment });
+          if (chain.length == count) {
+            $('#mqttTree').jstree().create_node("#", { "id": path, "data": { "value": message, "type": "string" }, "text": segment });
+          } else {
+            $('#mqttTree').jstree().create_node("#", { "id": path, "text": segment });
+          }
         }
-      } else {
-        if (chain.length == count) {
-          $('#mqttTree').jstree().create_node("#", { "id": segment, "data": { "value": message, "type": "string" }, "text": segment });
-        } else {
-          $('#mqttTree').jstree().create_node("#", { "id": segment, "text": segment });
-        }
+        mqttTopics = $('#mqttTree').jstree(true).get_json(null, { "flat": true });
       }
-      mqttTopics = $('#mqttTree').jstree(true).get_json(null, { "flat": true });
-      change=1;
+      count = count + 1
+      path=path+"-"
     }
-    count = count + 1
-  }
-  if (change==0){
+  } else {
     //console.log("value update");
-    var node=$('#mqttTree').jstree(true).get_node(chain[chain.length-1]);
+    //var node = $('#mqttTree').jstree(true).get_node(topic);
     //console.log(node);
-    node.data.value= message;
+    node.data.value = message;
     //console.log(node);
     //$('#mqttTree').jstree(true).refresh_node(node);
     //$('#mqttTree').jstree(true).redraw(true);
