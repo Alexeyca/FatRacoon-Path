@@ -72,14 +72,14 @@ function onMessageArrived(message) {
 function updateMqttTree(topic, message) {
   var chain = topic.split("/");
   var change=0;
-  console.log(chain);
+  //console.log(chain);
   var count = 0;
   for (var segment of chain) {
     if (!mqttTopics.some(x => x.id == segment)) {
       if (count > 0) {
-        console.log(chain[count - 1]);
+        //console.log(chain[count - 1]);
         if (chain.length == count+1) {
-          console.log("data");
+          //console.log("data");
           $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "data": { "value": message, "type": "string" }, "text": segment });
         } else {
           $('#mqttTree').jstree().create_node(chain[count - 1], { "id": segment, "text": segment });
@@ -97,12 +97,15 @@ function updateMqttTree(topic, message) {
     count = count + 1
   }
   if (change==0){
-    console.log("value update");
+    //console.log("value update");
     var node=$('#mqttTree').jstree(true).get_node(chain[chain.length-1]);
-    console.log(node);
+    //console.log(node);
     node.data.value= message;
-    console.log(node);
-    $('#mqttTree').jstree(true).refresh_node(node);
+    //console.log(node);
+    //$('#mqttTree').jstree(true).refresh_node(node);
+    //$('#mqttTree').jstree(true).redraw(true);
+    $('#mqttTree').jstree(true).redraw_node(node.parent);
+    $('#mqttTree').jstree(true).redraw(true);
   }
 
 }
