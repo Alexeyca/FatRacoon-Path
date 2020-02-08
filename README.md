@@ -1,1 +1,1 @@
-This is web base IDE for build adminictration and integration with MQTT.
+This is web base IDE for build administration and integration with MQTT.
